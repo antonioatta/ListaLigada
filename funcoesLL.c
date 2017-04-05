@@ -60,10 +60,19 @@ void inclui_em_ordem_nome(NODO_LL **pInicio, NODO_LL *pReg)
 
 int exclui_matric(NODO_LL **pInicio, char matric[])
 {
+    NODO_LL *pAux, *pAnt=NULL;
 
-    /* FICA COMO EXERCÍCIO DESENVOLVER ESTA FUNÇÃO */
-
-    return (0 || 1); // 1 se conseguiu excluir e 0 caso contrario (nao encontrou?).
+    pAux=*pInicio;
+    while (pAux!=NULL) {
+        if (strcmp(pAux->matric, matric) == 0) break;
+        pAnt=pAux;
+        pAux=pAux->prox;
+    }
+    if (pAux==NULL) return 0;
+    if (pAnt==NULL) *pInicio=pAux->prox;
+    else pAnt->prox=pAux->prox;
+    free(pAux);
+    return 1; // 1 se conseguiu excluir e 0 caso contrario (nao encontrou?).
 }
 
 
@@ -82,11 +91,11 @@ NODO_LL *consulta_matric(NODO_LL *inicio, char matricula[])
 }
 
 
-void imprime_lista(NODO_LL *inicio) {
+void imprime_lista(NODO_LL *pInicio) {
 
     NODO_LL *pAux;
 
-    pAux=inicio;
+    pAux=pInicio;
     printf("=== Conteudo da Lista ================\n");
     while (pAux!=NULL) {
         printf("%s, %s, %4.1f, %s\n", pAux->matric, pAux->nome, pAux->media, pAux->status);

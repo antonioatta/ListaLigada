@@ -47,9 +47,15 @@ int main()
     }
 
     printf("\n\n*** Vamos excluir alguns da registros lista ligada ***\n\n");
-
-    /* ACRESCENTE CODIGO AQUI PARA TESTAR SUA FUNCAO DE EXCLUSAO */
-
+    while (1) {
+        printf("Matricula (digite <Enter> para encerrar): ");
+        fgets(matricula, TAM_MATRIC, stdin);
+        tam=strlen(matricula);
+        if (matricula[tam-1]=='\n') matricula[tam-1]='\0';
+        if (strlen(matricula)==0) break;      // interrompe o loop infinito
+        if (exclui_matric(&inicio, matricula)) imprime_lista(inicio);
+        else printf("Registro inexistente na lista :(\n");
+    }
 
     return 0;
 
